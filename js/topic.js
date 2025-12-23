@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCollapsibleSections();
     initResourceTabs();
     initCompletionButton();
+    initLightbox();
     updatePageTitle(topic.title);
     
     // Trigger first code animation if present
@@ -681,4 +682,133 @@ function animateCode(codeText, elementId = 'animatedCode') {
     }
     
     typeNextCharacter();
+}
+
+// ===================================
+// LIGHTBOX / IMAGE ZOOM FUNCTIONALITY
+// ===================================
+let lightboxImages = [];
+let currentImageIndex = 0;
+
+function initLightbox() {
+    // Collect all clickable images from the page
+    lightboxImages = [];
+    
+    // Add hero image
+    const heroImg = document.querySelector('.hero-image');
+    if (heroImg) {
+        lightboxImages.push(heroImg.src);
+    }
+    
+    // Add topic images from sidebar
+    const topicImgs = document.querySelectorAll('.topic-image');
+    topicImgs.forEach(img => {
+        if (img.src) {
+            lightboxImages.push(img.src);
+        }
+    });
+    
+    if (lightboxImages.length === 0) {
+        return; // No images to zoom
+    }
+    
+    // Setup event listeners for all images
+    const allImages = document.querySelectorAll('.hero-image, .topic-image');
+    allImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            // Find the index of clicked image
+            currentImageIndex = lightboxImages.indexOf(img.src);
+            openLightbox();
+        });
+    });
+    
+    // Lightbox overlay and controls
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
+    if (!lightboxOverlay) return;
+    
+    // Close lightbox
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target === lightboxOverlay) {
+            closeLightbox();
+        }
+    });
+    
+    // Navigation
+    lightboxPrev?.addEventListener('click', showPrevImage);
+    lightboxNext?.addEventListener('click', showNextImage);
+    
+    // Keyboard controls
+    document.addEventListener('keydown', handleLightboxKeyboard);
+}
+
+function openLightbox() {
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
+    if (lightboxOverlay && lightboxImages[currentImageIndex]) {
+        lightboxImage.src = lightboxImages[currentImageIndex];
+        lightboxOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        updateLightboxCounter();
+        
+        // Hide navigation buttons if only one image
+        const prevBtn = document.getElementById('lightboxPrev');
+        const nextBtn = document.getElementById('lightboxNext');
+        if (lightboxImages.length <= 1) {
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+        }
+    }
+}
+
+function closeLightbox() {
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    if (lightboxOverlay) {
+        lightboxOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+}
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % lightboxImages.length;
+    updateLightboxImage();
+}
+
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + lightboxImages.length) % lightboxImages.length;
+    updateLightboxImage();
+}
+
+function updateLightboxImage() {
+    const lightboxImage = document.getElementById('lightboxImage');
+    if (lightboxImage && lightboxImages[currentImageIndex]) {
+        lightboxImage.src = lightboxImages[currentImageIndex];
+        updateLightboxCounter();
+    }
+}
+
+function updateLightboxCounter() {
+    const counter = document.getElementById('lightboxCounter');
+    if (counter && lightboxImages.length > 1) {
+        counter.textContent = `${currentImageIndex + 1} / ${lightboxImages.length}`;
+    }
+}
+
+function handleLightboxKeyboard(e) {
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    if (!lightboxOverlay?.classList.contains('active')) return;
+    
+    if (e.key === 'Escape') {
+        closeLightbox();
+    } else if (e.key === 'ArrowRight') {
+        showNextImage();
+    } else if (e.key === 'ArrowLeft') {
+        showPrevImage();
+    }
 }

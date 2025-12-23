@@ -4,10 +4,14 @@ const topicsData = [
         id: "complexity-analysis",
         title: "Complexity Analysis",
         shortDescription: "Learn Big O notation and analyze algorithm efficiency",
+        image: "assets/images/complexity-analysis.webp",
+        image2: "assets/images/2Time.webp",
+        image3: "assets/images/3Time.webp",
         duration: "3-4 days",
         icon: "📊",
         color: "#6366f1",
         banner: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+
         explanation: `
             <p>Complexity analysis is the foundation of competitive programming. It helps you understand how efficient your algorithms are and whether they will run within time limits.</p>
             <p>You'll learn to analyze:</p>
@@ -27,8 +31,11 @@ const topicsData = [
         ],
         resources: {
             videos: [
-                { title: "Big O Notation - Full Course", url: "https://www.youtube.com/watch?v=Mo4vesaut8g", duration: "1h 30m" },
-                { title: "Time Complexity Analysis", url: "https://www.youtube.com/watch?v=9TlHvipP5yA", duration: "45m" },
+                { title: "Asymptotic Complexity 1 (Arabic)", url: "https://www.youtube.com/watch?v=SmxZQpW_zA4", duration: "9m" },
+                { title: "Asymptotic Complexity 2 (Arabic)", url: "https://www.youtube.com/watch?v=krRT_US9Ll0", duration: "10m" },
+
+                { title: "Big O Notation - Full Course", url: "https://www.youtube.com/watch?v=Mo4vesaut8g", duration: "1h 56m" },
+                { title: "Time Complexity Analysis", url: "https://www.youtube.com/watch?v=9TlHvipP5yA", duration: "9m" },
                 { title: "Space Complexity Explained", url: "https://www.youtube.com/watch?v=yOb0BL-84h8", duration: "20m" }
             ],
             articles: [
@@ -37,6 +44,7 @@ const topicsData = [
                 { title: "Time Complexity Tutorial", url: "https://www.geeksforgeeks.org/understanding-time-complexity-simple-examples/", source: "GeeksforGeeks" }
             ],
             practice: [
+                { title: "Time Complexity Problems", url: "https://vjudge.net/contest/561493", platform: "VJudge" },
                 { title: "Complexity Analysis Problems", url: "https://codeforces.com/problemset?tags=implementation", platform: "Codeforces" },
                 { title: "Basic Implementation", url: "https://www.hackerrank.com/domains/algorithms", platform: "HackerRank" }
             ]
@@ -50,6 +58,41 @@ const topicsData = [
         icon: "🔄",
         color: "#ec4899",
         banner: "linear-gradient(135deg, #ec4899 0%, #f43f5e 100%)",
+        codeAnimationFirst: `
+// When you go to ChatGPT and ask it to write a prompt
+// to give to Claude to fix the style...
+// that's recursion. AI asking AI for help 🔁🤖
+
+function askForHelp(problem) {
+    if (problem == unsolved) {
+        return askForHelp(problem);
+    }
+    return "AI helping AI!";
+}
+        `,
+        codeAnimation: `
+// To understand this function,
+// first understand this function
+
+function understand(recursion) {
+  if (!understood) {
+    return understand(recursion);
+  }
+  return "Still confused";
+}
+        `,
+        codeAnimation2: `
+void infiniteRecursion() {
+    cout << "I will stop... I promise 😇"<< endl;
+    infiniteRecursion();
+}
+string studyForExam(int days) {
+    if (days == 0)
+        return "Passed by miracle ✨";
+    return studyForExam(days - 1);
+}
+
+        `,
         explanation: `
             <p>Recursion is a powerful technique where a function calls itself to solve smaller instances of the same problem.</p>
             <p>Key concepts include:</p>
@@ -222,6 +265,25 @@ const topicsData = [
         icon: "🔍",
         color: "#ef4444",
         banner: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+        image: "assets/images/Binary Search.webp",
+        codeAnimation: `
+#include <functional>
+
+using namespace std;
+
+int first_true(int lo, int hi, function<bool(int)> f) {
+    hi++;
+    while (lo < hi) {
+        int mid = (lo + hi) / 2;
+        if (f(mid)) {
+            hi = mid;
+        } else {
+            lo = mid + 1;
+        }
+    }
+    return lo;
+}
+        `,
         explanation: `
             <p>Binary search is a fundamental algorithm for searching in sorted data in O(log n) time.</p>
             <p>Applications include:</p>
@@ -349,6 +411,16 @@ const topicsData = [
         icon: "🔢",
         color: "#f43f5e",
         banner: "linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)",
+        codeAnimationFirst: `
+int gcd(int a, int b) {
+    if (b == 0) {
+        cout << "b got tired... GCD found 😴" << endl;
+        return a;
+    }
+    cout << "Fighting: " << a << " vs " << b << endl;
+    return gcd(b, a % b);
+}
+        `,
         explanation: `
             <p>Number theory covers mathematical properties of integers essential for CP.</p>
             <p>Key topics:</p>
@@ -471,7 +543,6 @@ const topicsData = [
     }
 ];
 
-// Export for use in other files
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = topicsData;
-}
+// make it global
+window.topicsData = topicsData;
+

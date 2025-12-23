@@ -21,7 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
     initCollapsibleSections();
     initResourceTabs();
     initCompletionButton();
+    initLightbox();
     updatePageTitle(topic.title);
+    
+    // Trigger first code animation if present
+    if (topic.codeAnimationFirst) {
+        setTimeout(() => {
+            animateCode(topic.codeAnimationFirst, 'animatedCodeFirst');
+        }, 300);
+    }
+    
+    // Trigger code animation if present
+    if (topic.codeAnimation) {
+        setTimeout(() => {
+            animateCode(topic.codeAnimation, 'animatedCode');
+        }, 1200);
+    }
+    
+    // Trigger second code animation if present
+    if (topic.codeAnimation2) {
+        setTimeout(() => {
+            animateCode(topic.codeAnimation2, 'animatedCode2');
+        }, 2400);
+    }
 });
 
 // ===================================
@@ -78,6 +100,67 @@ function renderTopic(topic) {
                 <div class="topic-layout">
                     <!-- Main Content -->
                     <div class="topic-main">
+                        <!-- Code Animation First Section - Displayed Before Others -->
+                        ${topic.codeAnimationFirst ? `
+                        <div class="content-section code-animation-section" data-section="code-animation-first">
+                            <div class="content-section-header">
+                                <h2 class="content-section-title">
+                                    <span class="icon">💻</span>
+                                    Recursion in Real Life
+                                </h2>
+                                <span class="collapse-icon">▼</span>
+                            </div>
+                            <div class="content-section-body">
+                                <div class="code-block animated-code">
+                                    <pre><code id="animatedCodeFirst"></code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+
+                        <!-- Code Animation Section - Displayed Second -->
+                        ${topic.codeAnimation ? `
+                        <div class="content-section code-animation-section" data-section="code-animation">
+                            <div class="content-section-header">
+                                <h2 class="content-section-title">
+                                    <span class="icon">💻</span>
+                                    Fun Code Example
+                                </h2>
+                                <span class="collapse-icon">▼</span>
+                            </div>
+                            <div class="content-section-body">
+                                <div class="code-block animated-code">
+                                    <pre><code id="animatedCode"></code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+
+                        <!-- Code Animation 2 Section -->
+                        ${topic.codeAnimation2 ? `
+                        <div class="content-section code-animation-section" data-section="code-animation-2">
+                            <div class="content-section-header">
+                                <h2 class="content-section-title">
+                                    <span class="icon">💻</span>
+                                    One More Example
+                                </h2>
+                                <span class="collapse-icon">▼</span>
+                            </div>
+                            <div class="content-section-body">
+                                <div class="code-block animated-code">
+                                    <pre><code id="animatedCode2"></code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+
+                        <!-- Topic Hero Image -->
+                        ${topic.image ? `
+                        <div class="topic-hero-image">
+                            <img src="${topic.image}" alt="${topic.title}" class="hero-image">
+                        </div>
+                        ` : ''}
+
                         <!-- Explanation Section -->
                         <div class="content-section" data-section="explanation">
                             <div class="content-section-header">
@@ -205,6 +288,20 @@ function renderTopic(topic) {
 
                     <!-- Sidebar -->
                     <aside class="topic-sidebar">
+                        <!-- Topic Image 2 Card -->
+                        ${topic.image2 ? `
+                        <div class="image-card">
+                            <img src="${topic.image2}" alt="${topic.title} - Time Complexity" class="topic-image">
+                        </div>
+                        ` : ''}
+
+                        <!-- Topic Image 3 Card -->
+                        ${topic.image3 ? `
+                        <div class="image-card">
+                            <img src="${topic.image3}" alt="${topic.title} - Time Complexity" class="topic-image">
+                        </div>
+                        ` : ''}
+
                         <!-- Completion Action Card -->
                         <div class="action-card">
                             <h3>Topic Status</h3>
@@ -484,3 +581,246 @@ document.addEventListener('keydown', (e) => {
         });
     }
 });
+
+// ===================================
+// CODE ANIMATION
+// ===================================
+function animateCode(codeText, elementId = 'animatedCode') {
+    const codeElement = document.getElementById(elementId);
+    if (!codeElement) return;
+    
+    codeElement.innerHTML = ''; // Clear any existing content
+    let index = 0;
+    
+    // Syntax highlighting map
+    const keywords = ['function', 'if', 'return', 'const', 'let', 'var', 'void', 'cout'];
+    const builtins = ['understood', 'recursion', 'infiniteRecursion'];
+    
+    function typeNextCharacter() {
+        if (index < codeText.length) {
+            let char = codeText[index];
+            let span = document.createElement('span');
+            
+            // Check for keywords and apply colors
+            let found = false;
+            
+            // Check for multi-character tokens (keywords, identifiers)
+            if (/[a-zA-Z_]/.test(char)) {
+                let word = '';
+                let tempIndex = index;
+                while (tempIndex < codeText.length && /[a-zA-Z0-9_]/.test(codeText[tempIndex])) {
+                    word += codeText[tempIndex];
+                    tempIndex++;
+                }
+                
+                if (keywords.includes(word)) {
+                    span.className = 'code-keyword';
+                    span.textContent = word;
+                    codeElement.appendChild(span);
+                    index += word.length;
+                    found = true;
+                } else if (builtins.includes(word)) {
+                    span.className = 'code-variable';
+                    span.textContent = word;
+                    codeElement.appendChild(span);
+                    index += word.length;
+                    found = true;
+                }
+            }
+            
+            if (!found) {
+                // Handle single characters with colors
+                if (char === '(' || char === ')' || char === '{' || char === '}') {
+                    span.className = 'code-bracket';
+                    span.textContent = char;
+                } else if (char === '"' || char === "'") {
+                    span.className = 'code-string';
+                    span.textContent = char;
+                } else if (char === '=' || char === '!' || char === '&' || char === '|') {
+                    span.className = 'code-operator';
+                    span.textContent = char;
+                } else if (char === '/' && codeText[index + 1] === '/') {
+                    // Handle comments
+                    let comment = '';
+                    while (index < codeText.length && codeText[index] !== '\n') {
+                        comment += codeText[index];
+                        index++;
+                    }
+                    span.className = 'code-comment';
+                    span.textContent = comment;
+                    codeElement.appendChild(span);
+                    found = true;
+                } else if (char === '\n') {
+                    span.textContent = '\n';
+                } else {
+                    span.textContent = char;
+                }
+                
+                if (!found) {
+                    codeElement.appendChild(span);
+                    index++;
+                }
+            }
+            
+            // Variable speed based on character type
+            let delay = 30;
+            if (char === '\n') {
+                delay = 50;
+            } else if (char === ' ') {
+                delay = 20;
+            } else if (char === '{' || char === '}' || char === ';') {
+                delay = 40;
+            }
+            
+            setTimeout(typeNextCharacter, delay);
+            
+            // Auto-scroll to show the animation
+            const codeBlock = codeElement.closest('.code-block');
+            if (codeBlock) {
+                codeBlock.scrollLeft = codeBlock.scrollWidth;
+            }
+        }
+    }
+    
+    typeNextCharacter();
+}
+
+// ===================================
+// LIGHTBOX / IMAGE ZOOM FUNCTIONALITY
+// ===================================
+let lightboxImages = [];
+let currentImageIndex = 0;
+
+function initLightbox() {
+    // Collect all clickable images from the page
+    lightboxImages = [];
+    
+    // Add hero image
+    const heroImg = document.querySelector('.hero-image');
+    if (heroImg) {
+        lightboxImages.push(heroImg.src);
+    }
+    
+    // Add topic images from sidebar
+    const topicImgs = document.querySelectorAll('.topic-image');
+    topicImgs.forEach(img => {
+        if (img.src) {
+            lightboxImages.push(img.src);
+        }
+    });
+    
+    if (lightboxImages.length === 0) {
+        return; // No images to zoom
+    }
+    
+    // Setup event listeners for all images
+    const allImages = document.querySelectorAll('.hero-image, .topic-image');
+    allImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            // Find the index of clicked image
+            currentImageIndex = lightboxImages.indexOf(img.src);
+            openLightbox();
+        });
+    });
+    
+    // Lightbox overlay and controls
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
+    if (!lightboxOverlay) return;
+    
+    // Close lightbox
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target === lightboxOverlay) {
+            closeLightbox();
+        }
+    });
+    
+    // Navigation
+    lightboxPrev?.addEventListener('click', showPrevImage);
+    lightboxNext?.addEventListener('click', showNextImage);
+    
+    // Keyboard controls
+    document.addEventListener('keydown', handleLightboxKeyboard);
+}
+
+function openLightbox() {
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
+    if (lightboxOverlay && lightboxImages[currentImageIndex]) {
+        lightboxImage.src = lightboxImages[currentImageIndex];
+        lightboxOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        updateLightboxCounter();
+        
+        // Hide navigation buttons if only one image
+        const prevBtn = document.getElementById('lightboxPrev');
+        const nextBtn = document.getElementById('lightboxNext');
+        if (lightboxImages.length <= 1) {
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+        }
+    }
+}
+
+function closeLightbox() {
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
+    if (lightboxOverlay) {
+        // Add closing animation
+        lightboxImage?.classList.add('closing');
+        lightboxOverlay.classList.add('closing');
+        
+        // Remove after animation completes
+        setTimeout(() => {
+            lightboxOverlay.classList.remove('active');
+            lightboxOverlay.classList.remove('closing');
+            lightboxImage?.classList.remove('closing');
+            document.body.style.overflow = ''; // Restore scrolling
+        }, 400); // Match animation duration
+    }
+}
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % lightboxImages.length;
+    updateLightboxImage();
+}
+
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + lightboxImages.length) % lightboxImages.length;
+    updateLightboxImage();
+}
+
+function updateLightboxImage() {
+    const lightboxImage = document.getElementById('lightboxImage');
+    if (lightboxImage && lightboxImages[currentImageIndex]) {
+        lightboxImage.src = lightboxImages[currentImageIndex];
+        updateLightboxCounter();
+    }
+}
+
+function updateLightboxCounter() {
+    const counter = document.getElementById('lightboxCounter');
+    if (counter && lightboxImages.length > 1) {
+        counter.textContent = `${currentImageIndex + 1} / ${lightboxImages.length}`;
+    }
+}
+
+function handleLightboxKeyboard(e) {
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    if (!lightboxOverlay?.classList.contains('active')) return;
+    
+    if (e.key === 'Escape') {
+        closeLightbox();
+    } else if (e.key === 'ArrowRight') {
+        showNextImage();
+    } else if (e.key === 'ArrowLeft') {
+        showPrevImage();
+    }
+}

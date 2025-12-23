@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete roadmap for Competitive Programming Phase 1. Learn algorithms and data structures to reach Codeforces Pupil level.">
+    <title>Roadmap - CP Roadmap Phase 1</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/roadmap.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <img src="assets/images/logo.svg" alt="CP Roadmap Logo" width="24" height="24">
+                </div>
+                <span class="hide-mobile">CP Roadmap</span>
+            </a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="roadmap.html" class="active">Roadmap</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#why-cp">Why CP?</a></li>
+            </ul>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container page-header-content">
+            <span class="badge badge-primary">Phase 1</span>
+            <h1>Learning Roadmap</h1>
+            <p>Master the fundamentals of competitive programming with our structured curriculum. Complete each topic to track your progress.</p>
+        </div>
+    </header>
+
+    <!-- Progress Section -->
+    <section class="progress-section">
+        <div class="container">
+            <div class="progress-card">
+                <div class="progress-header">
+                    <div class="progress-title">
+                        <span style="font-size: 1.5rem;">📊</span>
+                        <h3>Your Progress</h3>
+                    </div>
+                    <div class="progress-stats">
+                        <div class="progress-stat">
+                            <div class="progress-stat-value" id="completedCount">0</div>
+                            <div class="progress-stat-label">Completed</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="progress-stat-value" id="totalCount">11</div>
+                            <div class="progress-stat-label">Total Topics</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="progress-stat-value" id="daysEstimate">~50</div>
+                            <div class="progress-stat-label">Days Est.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+                <div class="progress-percentage">
+                    <span id="progressPercent">0</span>% Complete
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">
+                    📋 All Topics
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    ✅ Completed
+                </button>
+                <button class="filter-btn" data-filter="pending">
+                    ⏳ Not Started
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Grid -->
+    <section class="topics-section">
+        <div class="container">
+            <div class="topics-grid" id="topicsGrid">
+                <!-- Topic cards will be injected by JavaScript -->
+            </div>
+            
+            <!-- Empty State -->
+            <div class="empty-state hidden" id="emptyState">
+                <div class="empty-state-icon">🔍</div>
+                <h3>No topics found</h3>
+                <p>Try changing the filter to see topics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="assets/images/logo.svg" alt="CP Roadmap Logo" width="24" height="24">
+                <span>CP Roadmap</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="roadmap.html">Roadmap</a>
+                <a href="https://codeforces.com" target="_blank">Codeforces</a>
+                <a href="https://leetcode.com" target="_blank">LeetCode</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Competitive Programming Roadmap. Built for aspiring competitive programmers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data/topics.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/roadmap.js"></script>
+</body>
+</html>

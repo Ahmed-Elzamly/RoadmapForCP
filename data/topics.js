@@ -308,7 +308,7 @@ int first_true(int lo, int hi, function<bool(int)> f) {
         resources: {
             videos: [
                 { title: "Binary Search Tutorial", url: "https://www.youtube.com/watch?v=GU7DpgHINWQ", duration: "45m" },
-                { title: "Binary Search on Answer", url: "https://www.youtube.com/watch?v=YyLGvl5svmY", duration: "30m" },
+                { title: "Binary Search on Answer", url: "https://youtu.be/IZP_8-JZqhM?si=zQOH31pT5euHCXOR", duration: "7m" },
                 { title: "Advanced Binary Search", url: "https://www.youtube.com/watch?v=v57lNF2mb_s", duration: "1h" }
             ],
             articles: [
@@ -351,7 +351,7 @@ int first_true(int lo, int hi, function<bool(int)> f) {
         resources: {
             videos: [
                 { title: "Two Pointers Technique", url: "https://www.youtube.com/watch?v=On03HWe2tZM", duration: "35m" },
-                { title: "Two Pointers Patterns", url: "https://www.youtube.com/watch?v=ijKsEB15xYc", duration: "25m" },
+                { title: "Two Pointers Patterns", url: "https://youtu.be/QzZ7nmouLTI?si=0lNlVnUS6vpY5NZg", duration: "8m" },
                 { title: "Common Two Pointer Problems", url: "https://www.youtube.com/watch?v=cRBSOz49fQk", duration: "40m" }
             ],
             articles: [
@@ -450,7 +450,7 @@ int gcd(int a, int b) {
             videos: [
                 { title: "Number Theory for CP", url: "https://www.youtube.com/watch?v=1xNbjMdbjug", duration: "1h 30m" },
                 { title: "Sieve of Eratosthenes", url: "https://www.youtube.com/watch?v=pKvGYOnO9Ao", duration: "20m" },
-                { title: "Modular Arithmetic", url: "https://www.youtube.com/watch?v=M1tPjlmJxrU", duration: "45m" }
+                { title: "Modular Arithmetic", url: "https://youtu.be/RCq5TYMZEwg?si=UDxz835kJAiIC8jc", duration: "15m" }
             ],
             articles: [
                 { title: "Number Theory Basics", url: "https://cp-algorithms.com/algebra/", source: "CP-Algorithms" },
@@ -492,9 +492,9 @@ int gcd(int a, int b) {
         ],
         resources: {
             videos: [
-                { title: "Combinatorics Basics", url: "https://www.youtube.com/watch?v=F7DvNBQTWrY", duration: "1h" },
-                { title: "nCr Computation", url: "https://www.youtube.com/watch?v=RmFXLhEhVLQ", duration: "30m" },
-                { title: "Inclusion-Exclusion", url: "https://www.youtube.com/watch?v=yB2SaJ4WlK4", duration: "40m" }
+                { title: "Combinatorics Basics", url: "https://youtu.be/XJnIdRXUi7A?si=8vtzrXouPQCWxqR3", duration: "17m" },
+                { title: "nCr Computation", url: "https://youtu.be/bR7mQgwQ_o8?si=5sFWqIkXP0llm676", duration: "27m" },
+                { title: "Inclusion-Exclusion", url: "https://youtu.be/GS7dIWA6Hpo?si=xv2HCYHhfRjmuWuJ", duration: "18m" }
             ],
             articles: [
                 { title: "Combinatorics Tutorial", url: "https://cp-algorithms.com/combinatorics/binomial-coefficients.html", source: "CP-Algorithms" },

@@ -4,9 +4,9 @@ const topicsData = [
         id: "complexity-analysis",
         title: "Complexity Analysis",
         shortDescription: "Learn Big O notation and analyze algorithm efficiency",
-        image: "assets/images/complexity-analysis.png",
-        image2: "assets/images/2Time.png",
-        image3: "assets/images/3Time.png",
+        image: "assets/images/complexity-analysis.webp",
+        image2: "assets/images/2Time.webp",
+        image3: "assets/images/3Time.webp",
         duration: "3-4 days",
         icon: "📊",
         color: "#6366f1",
@@ -265,7 +265,7 @@ string studyForExam(int days) {
         icon: "🔍",
         color: "#ef4444",
         banner: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
-        image: "assets/images/Binary Search.png",
+        image: "assets/images/Binary Search.webp",
         codeAnimation: `
 #include <functional>
 

@@ -769,9 +769,20 @@ function openLightbox() {
 
 function closeLightbox() {
     const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
     if (lightboxOverlay) {
-        lightboxOverlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
+        // Add closing animation
+        lightboxImage?.classList.add('closing');
+        lightboxOverlay.classList.add('closing');
+        
+        // Remove after animation completes
+        setTimeout(() => {
+            lightboxOverlay.classList.remove('active');
+            lightboxOverlay.classList.remove('closing');
+            lightboxImage?.classList.remove('closing');
+            document.body.style.overflow = ''; // Restore scrolling
+        }, 400); // Match animation duration
     }
 }
 

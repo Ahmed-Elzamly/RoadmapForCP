@@ -2,6 +2,27 @@
    TOPIC DETAILS PAGE JAVASCRIPT
    =================================== */
 
+// ===================================
+// UTILITY FUNCTIONS
+// ===================================
+function extractYouTubeId(url) {
+    if (!url) return null;
+    
+    // Handle youtu.be URLs
+    let match = url.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+    if (match) return match[1];
+    
+    // Handle youtube.com URLs with v parameter
+    match = url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/);
+    if (match) return match[1];
+    
+    // Handle youtube.com/embed/ URLs
+    match = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/);
+    if (match) return match[1];
+    
+    return null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const topicId = getUrlParameter('id');
     
@@ -230,20 +251,44 @@ function renderTopic(topic) {
                                 <!-- Videos Panel -->
                                 <div class="resource-panel active" data-panel="videos">
                                     <div class="resource-list">
-                                        ${topic.resources.videos.map(video => `
-                                            <a href="${video.url}" target="_blank" class="resource-item">
-                                                <div class="resource-icon video">🎬</div>
-                                                <div class="resource-info">
-                                                    <div class="resource-title">${video.title}</div>
-                                                    <div class="resource-meta">
+                                        ${topic.resources.videos.map(video => {
+                                            const videoId = extractYouTubeId(video.url);
+                                            const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+                                            return embedUrl ? `
+                                                <div class="video-embed-item">
+                                                    <div class="video-title">${video.title}</div>
+                                                    <div class="video-meta">
                                                         <span>📺 YouTube</span>
                                                         <span>•</span>
                                                         <span>⏱️ ${video.duration}</span>
                                                     </div>
+                                                    <div class="video-embed-container">
+                                                        <iframe 
+                                                            width="100%" 
+                                                            height="315" 
+                                                            src="${embedUrl}" 
+                                                            title="${video.title}" 
+                                                            frameborder="0" 
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                                            allowfullscreen>
+                                                        </iframe>
+                                                    </div>
                                                 </div>
-                                                <span class="resource-arrow">→</span>
-                                            </a>
-                                        `).join('')}
+                                            ` : `
+                                                <a href="${video.url}" target="_blank" class="resource-item">
+                                                    <div class="resource-icon video">🎬</div>
+                                                    <div class="resource-info">
+                                                        <div class="resource-title">${video.title}</div>
+                                                        <div class="resource-meta">
+                                                            <span>📺 YouTube</span>
+                                                            <span>•</span>
+                                                            <span>⏱️ ${video.duration}</span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="resource-arrow">→</span>
+                                                </a>
+                                            `;
+                                        }).join('')}
                                     </div>
                                 </div>
 

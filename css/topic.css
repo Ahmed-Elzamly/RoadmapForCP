@@ -32,6 +32,24 @@
     background: linear-gradient(to top, var(--bg-primary), transparent);
 }
 
+/* Topic Header Image */
+.topic-header-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+.topic-header.has-header-image::before {
+    background: linear-gradient(to bottom, rgba(10, 10, 20, 0.6) 0%, rgba(10, 10, 20, 0.9) 100%);
+    opacity: 1;
+}
+
 .topic-header-content {
     position: relative;
     z-index: 1;

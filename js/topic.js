@@ -21,29 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCollapsibleSections();
     initResourceTabs();
     initCompletionButton();
-    initLightbox();
     updatePageTitle(topic.title);
-    
-    // Trigger first code animation if present
-    if (topic.codeAnimationFirst) {
-        setTimeout(() => {
-            animateCode(topic.codeAnimationFirst, 'animatedCodeFirst');
-        }, 300);
-    }
-    
-    // Trigger code animation if present
-    if (topic.codeAnimation) {
-        setTimeout(() => {
-            animateCode(topic.codeAnimation, 'animatedCode');
-        }, 1200);
-    }
-    
-    // Trigger second code animation if present
-    if (topic.codeAnimation2) {
-        setTimeout(() => {
-            animateCode(topic.codeAnimation2, 'animatedCode2');
-        }, 2400);
-    }
 });
 
 // ===================================
@@ -73,8 +51,6 @@ function renderTopic(topic) {
                     <span>${topic.title}</span>
                 </nav>
                 
-                <span class="topic-icon-large">${topic.icon}</span>
-                
                 <h1>${topic.title}</h1>
                 
                 <div class="topic-meta">
@@ -100,67 +76,6 @@ function renderTopic(topic) {
                 <div class="topic-layout">
                     <!-- Main Content -->
                     <div class="topic-main">
-                        <!-- Code Animation First Section - Displayed Before Others -->
-                        ${topic.codeAnimationFirst ? `
-                        <div class="content-section code-animation-section" data-section="code-animation-first">
-                            <div class="content-section-header">
-                                <h2 class="content-section-title">
-                                    <span class="icon">💻</span>
-                                    Recursion in Real Life
-                                </h2>
-                                <span class="collapse-icon">▼</span>
-                            </div>
-                            <div class="content-section-body">
-                                <div class="code-block animated-code">
-                                    <pre><code id="animatedCodeFirst"></code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        ` : ''}
-
-                        <!-- Code Animation Section - Displayed Second -->
-                        ${topic.codeAnimation ? `
-                        <div class="content-section code-animation-section" data-section="code-animation">
-                            <div class="content-section-header">
-                                <h2 class="content-section-title">
-                                    <span class="icon">💻</span>
-                                    Fun Code Example
-                                </h2>
-                                <span class="collapse-icon">▼</span>
-                            </div>
-                            <div class="content-section-body">
-                                <div class="code-block animated-code">
-                                    <pre><code id="animatedCode"></code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        ` : ''}
-
-                        <!-- Code Animation 2 Section -->
-                        ${topic.codeAnimation2 ? `
-                        <div class="content-section code-animation-section" data-section="code-animation-2">
-                            <div class="content-section-header">
-                                <h2 class="content-section-title">
-                                    <span class="icon">💻</span>
-                                    One More Example
-                                </h2>
-                                <span class="collapse-icon">▼</span>
-                            </div>
-                            <div class="content-section-body">
-                                <div class="code-block animated-code">
-                                    <pre><code id="animatedCode2"></code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        ` : ''}
-
-                        <!-- Topic Hero Image -->
-                        ${topic.image ? `
-                        <div class="topic-hero-image">
-                            <img src="${topic.image}" alt="${topic.title}" class="hero-image">
-                        </div>
-                        ` : ''}
-
                         <!-- Explanation Section -->
                         <div class="content-section" data-section="explanation">
                             <div class="content-section-header">
@@ -288,20 +203,6 @@ function renderTopic(topic) {
 
                     <!-- Sidebar -->
                     <aside class="topic-sidebar">
-                        <!-- Topic Image 2 Card -->
-                        ${topic.image2 ? `
-                        <div class="image-card">
-                            <img src="${topic.image2}" alt="${topic.title} - Time Complexity" class="topic-image">
-                        </div>
-                        ` : ''}
-
-                        <!-- Topic Image 3 Card -->
-                        ${topic.image3 ? `
-                        <div class="image-card">
-                            <img src="${topic.image3}" alt="${topic.title} - Time Complexity" class="topic-image">
-                        </div>
-                        ` : ''}
-
                         <!-- Completion Action Card -->
                         <div class="action-card">
                             <h3>Topic Status</h3>

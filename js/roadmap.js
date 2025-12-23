@@ -43,10 +43,11 @@ function renderTopics(filter = 'all') {
         const originalIndex = topicsData.findIndex(t => t.id === topic.id);
         
         return `
-            <article class="topic-card ${isCompleted ? 'completed' : ''}" 
+            <article class="topic-card ${isCompleted ? 'completed' : ''} ${topic.cardImage ? 'has-image' : ''}" 
                      data-topic-id="${topic.id}"
                      style="--card-accent: ${topic.banner}; --card-banner: ${topic.banner}; animation-delay: ${index * 100}ms">
                 <div class="topic-card-header">
+                    ${topic.cardImage ? `<img src="${topic.cardImage}" alt="${topic.title}" class="topic-card-image">` : ''}
                     <span class="topic-number">${originalIndex + 1}</span>
                     <span class="topic-card-icon">${topic.icon}</span>
                     <span class="topic-card-status"></span>

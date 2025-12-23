@@ -4,9 +4,8 @@ const topicsData = [
         id: "complexity-analysis",
         title: "Complexity Analysis",
         shortDescription: "Learn Big O notation and analyze algorithm efficiency",
-        image: "assets/images/complexity-analysis.webp",
-        image2: "assets/images/2Time.webp",
-        image3: "assets/images/3Time.webp",
+        image: "assets/images/time-complexity.png",
+        cardImage: "assets/images/TimeComplexity.png",
         duration: "3-4 days",
         icon: "📊",
         color: "#6366f1",
@@ -54,6 +53,7 @@ const topicsData = [
         id: "recursion",
         title: "Recursion",
         shortDescription: "Master recursive thinking and problem decomposition",
+        cardImage: "assets/images/Recursion.jpg",
         duration: "4-5 days",
         icon: "🔄",
         color: "#ec4899",
@@ -134,6 +134,7 @@ string studyForExam(int days) {
         duration: "5-7 days",
         icon: "📚",
         color: "#14b8a6",
+        cardImage: "assets/images/stl.png",
         banner: "linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%)",
         explanation: `
             <p>The Standard Template Library (STL) is a powerful toolbox that provides ready-to-use data structures and algorithms.</p>
@@ -176,6 +177,7 @@ string studyForExam(int days) {
         duration: "5-6 days",
         icon: "🎯",
         color: "#f59e0b",
+        cardImage: "assets/images/Greedy.png",
         banner: "linear-gradient(135deg, #f59e0b 0%, #f97316 100%)",
         explanation: `
             <p>Greedy algorithms make the locally optimal choice at each step, hoping to find a global optimum.</p>
@@ -215,6 +217,7 @@ string studyForExam(int days) {
         id: "prefix-sum-sliding-window",
         title: "Prefix Sum & Sliding Window",
         shortDescription: "Optimize range queries and subarray problems",
+        cardImage: "assets/images/Prefix Sum.png",
         duration: "4-5 days",
         icon: "📈",
         color: "#8b5cf6",
@@ -263,9 +266,10 @@ string studyForExam(int days) {
         shortDescription: "Divide and conquer to find elements in O(log n)",
         duration: "4-5 days",
         icon: "🔍",
+        cardImage: "assets/images/Binary Search.png",
         color: "#ef4444",
         banner: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
-        image: "assets/images/Binary Search.webp",
+        image: "assets/images/Binary Search.png",
         codeAnimation: `
 #include <functional>
 
@@ -325,6 +329,7 @@ int first_true(int lo, int hi, function<bool(int)> f) {
         duration: "3-4 days",
         icon: "👆👆",
         color: "#22c55e",
+        cardImage: "assets/images/TwoPointers.png",
         banner: "linear-gradient(135deg, #22c55e 0%, #10b981 100%)",
         explanation: `
             <p>Two pointers technique uses two indices to traverse data structures efficiently.</p>
@@ -367,6 +372,7 @@ int first_true(int lo, int hi, function<bool(int)> f) {
         duration: "4-5 days",
         icon: "🔢",
         color: "#06b6d4",
+        cardImage: "assets/images/BitMast.png",
         banner: "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
         explanation: `
             <p>Bitmasking uses binary representations to efficiently handle subsets and states.</p>
@@ -410,6 +416,7 @@ int first_true(int lo, int hi, function<bool(int)> f) {
         duration: "6-7 days",
         icon: "🔢",
         color: "#f43f5e",
+        cardImage: "assets/images/NumberTheory.png",
         banner: "linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)",
         codeAnimationFirst: `
 int gcd(int a, int b) {
@@ -463,6 +470,7 @@ int gcd(int a, int b) {
         duration: "5-6 days",
         icon: "🎲",
         color: "#a855f7",
+        cardImage: "assets/images/Combinatorics.png",
         banner: "linear-gradient(135deg, #a855f7 0%, #9333ea 100%)",
         explanation: `
             <p>Combinatorics is the mathematics of counting and arranging objects.</p>
@@ -506,6 +514,7 @@ int gcd(int a, int b) {
         duration: "4-5 days",
         icon: "🔎",
         color: "#64748b",
+        cardImage: "assets/images/CompleteSearch.png",
         banner: "linear-gradient(135deg, #64748b 0%, #475569 100%)",
         explanation: `
             <p>Complete search explores all possible solutions to find the answer.</p>
